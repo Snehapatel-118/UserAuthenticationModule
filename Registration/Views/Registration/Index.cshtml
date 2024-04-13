@@ -1,0 +1,153 @@
+﻿<html>
+    <style>
+* {box-sizing: border-box}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit/register button */
+.registerbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity:1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+        </style>
+
+      <script src="~/Script/Checkeditor/ckeditor.js"></script>
+    <script src="~/Script/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="~/Script/jquery-1.10.2.js"></script>
+
+      @if (TempData["message"] != null) 
+    {  
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@TempData["message"]");
+            };
+        </script>  
+    }  
+
+<form action="~/Registration/Manage" method="post" onsubmit="return myFunction()">
+  <div class="container">
+
+    <h1>Register</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+     
+      <label for="FirstName"><b>FirstName</b></label>
+          <input type="text" placeholder="Enter First Name" name="FirstName" id="FirstName" >
+    
+      <label for="LastName"><b>LastName</b></label>
+         <input type="text" placeholder="Enter Last Name" name="LastName" id="LastName" >
+    
+      <label for="ContactNo"><b>Contact Number</b></label>
+         <input type="text" placeholder="Enter Contact Number" name="ContactNo" id="ContactNo" >
+    
+      <label for="Email"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="Email" id="Email" >
+
+    <label for="Password"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="Password" id="Password" >
+
+    <hr>
+       <input type="submit" class="registerbtn" value="Registation">
+         
+  </div>
+    
+  <div class="container signin">
+    <p>Already have an account? <a href="~/Login/Index">Login</a>.</p>
+      
+  </div>
+</form>
+     
+    </html>
+
+
+<script>
+
+    function myFunction() {
+
+        var filter1 = /[a-zA-Z]/g;
+         var filter2 = /[$,<>#:?_*&;]/g;
+        var filter3 = /[0-9]/g;
+        var d = $("#Password").val();
+    
+
+        if ($("#FirstName").val() == "") {
+            alert("Please Enter First Name.")
+            return false;
+        }
+        else if ($("#LastName").val() == "") {
+            alert("Please Enter Last Name.")
+            return false;
+        }
+        else if ($("#ContactNo").val() == "") {
+            alert("Please Enter Contact Number.")
+           return false;
+        }
+     
+        else if ($("#Email").val() == "") {
+            alert( "Please Enter Email.")
+            return false;
+        }
+        else if (!$("#Email").val().match(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i)) {
+            alert("Please Enter Valid Email.");
+            return false;
+        }
+        else if (!d.match(filter1) || !d.match(filter1) || !d.match(filter3)) {
+            $("#Password").focus();
+            alert("Password must have at least 8 characters with 1 capital, 1 lower, 1 number and 1 special characters.")
+            return false;
+        }
+     
+        else {
+            return true;
+          
+        }
+       
+        
+    }
+
+</script>
